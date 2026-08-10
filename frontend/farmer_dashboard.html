@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/farmer-dashboard.css">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+
+<header>
+    <h2>Farmer Dashboard</h2>
+
+    <div class="header-right">
+
+        <div class="profile" onclick="toggleProfile()">
+
+            <img
+                src="https://ui-avatars.com/api/?name=Farmer&background=43a047&color=fff"
+                class="profile-img"
+                id="profileImage"
+            >
+
+            <div>
+                <h4 id="farmerName">Farmer Name</h4>
+                <small>Farmer</small>
+            </div>
+
+        </div>
+
+        <button class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </div>
+</header>
+
+<div id="profileInfo" class="hidden">
+
+    <p><strong>Name:</strong> <span id="profileName"></span></p>
+
+    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+    <p><strong>State:</strong> <span id="profileState"></span></p>
+
+    <p><strong>Village:</strong> <span id="profileVillage"></span></p>
+
+</div>
+
+<div class="container">
+
+    <div id="dashboard">
+
+        <div class="dashboard-card"
+             onclick="window.location.href='add_crop.html'">
+
+            <i class="fa-solid fa-seedling"></i>
+
+            <h3>Add Crop</h3>
+
+            <p>Upload fresh crops for buyers.</p>
+
+        </div>
+
+        <div class="dashboard-card"
+             onclick="window.location.href='my_uploads.html'">
+
+            <i class="fa-solid fa-box-open"></i>
+
+            <h3>My Uploads</h3>
+
+            <p>Manage all uploaded crops.</p>
+
+        </div>
+
+        <div class="dashboard-card"
+             onclick="window.location.href='farmer_orders.html'">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h3>Orders</h3>
+
+            <p>Accept and manage customer orders.</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("user"));
+const token = localStorage.getItem("token");
+
+if (!user || !token) {
+    window.location.href = "login.html";
+}
+
+document.getElementById("farmerName").textContent = user.name;
+document.getElementById("profileName").textContent = user.name;
+document.getElementById("profileEmail").textContent = user.email;
+document.getElementById("profileState").textContent = user.state;
+document.getElementById("profileVillage").textContent = user.village;
+
+function toggleProfile() {
+    document.getElementById("profileInfo").classList.toggle("hidden");
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>
